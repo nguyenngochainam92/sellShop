@@ -49,4 +49,14 @@
 @endsection
 @section('scripts')
 	<script src="{!! asset('js/price-range.js') !!}"></script>
+	<script type="text/javascript">
+		/*price range*/
+
+		 $('#sl2').slider();
+
+			var RGBChange = function() {
+			  $('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
+			};	
+				
+	</script>
 @endsection
