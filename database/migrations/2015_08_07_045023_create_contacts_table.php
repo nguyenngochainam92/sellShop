@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryTable extends Migration
+class CreateContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,14 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('description');
             $table->timestamps();
-            $table->integer('parent_Id');
-            $table->integer('sort_order');
-            $table->boolean('status');
+            $table->string('company_name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('fax')->nullable();
+            $table->string('email');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::drop('category');
+        Schema::drop('contacts');
     }
 }
