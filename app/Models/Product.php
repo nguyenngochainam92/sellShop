@@ -24,4 +24,8 @@ class Product extends Model
     {
     	return $this->belongsTo('App\Models\Condition');
     }
+    public function productImage()
+    {
+        return $this->hasMany('App\Models\ProductImage')
+    }
 }

@@ -8,4 +8,8 @@ class Filter extends Model
 {
     protected $table = 'filter';
     //
+    public function filtergroup()
+    {
+    	return $this->belongsTo('App\Models\FilterGroup');
+    }
 }
