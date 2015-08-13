@@ -20,3 +20,8 @@ Route::get('/contact',function(){
 Route::get('/pdetail',function(){
 	return view('front/productDetail');
 });
+// Auth
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);

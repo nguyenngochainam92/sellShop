@@ -12,7 +12,7 @@ class CreateConditionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('condittions', function (Blueprint $table) {
+        Schema::create('conditions', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('name');

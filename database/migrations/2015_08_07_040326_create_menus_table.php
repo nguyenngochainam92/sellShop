@@ -18,7 +18,7 @@ class CreateMenusTable extends Migration
             $table->string('name');
             $table->integer('sort_order');
             $table->integer('parent_Id');
-            $table->integer('status')->default('true');
+            $table->integer('status')->default(true);
         });
     }
 
