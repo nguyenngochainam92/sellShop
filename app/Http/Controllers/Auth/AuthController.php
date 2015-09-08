@@ -39,14 +39,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
-    }
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'name' => 'required|max:255',
+    //         'email' => 'required|email|max:255|unique:users',
+    //         'password' => 'required|confirmed|min:6',
+    //     ]);
+    // }
 
     /**
      * Create a new user instance after a valid registration.
@@ -54,12 +54,69 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    // protected function create(array $data)
+    // {
+    //     return User::create([
+    //         'name' => $data['name'],
+    //         'email' => $data['email'],
+    //         'password' => bcrypt($data['password']),
+    //     ]);
+    // }
+
+    public function postLogin(
+    LoginRequest $request,
+    Guard $auth)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        dd(123);
+        $logValue = $request->input('log');
+
+        $logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        $throttles = in_array(
+            ThrottlesLogins::class, class_uses_recursive(get_class($this))
+        );
+
+        if ($throttles && $this->hasTooManyLoginAttempts($request)) {
+            return redirect('/auth/login')
+                ->with('error', trans('front/login.maxattempt'))
+                ->withInput($request->only('log'));
+        }
+
+        $credentials = [
+            $logAccess  => $logValue, 
+            'password'  => $request->input('password')
+        ];
+
+        if(!$auth->validate($credentials)) {
+            if ($throttles) {
+                $this->incrementLoginAttempts($request);
+            }
+
+            return redirect('/auth/login')
+                ->with('error', trans('front/login.credentials'))
+                ->withInput($request->only('log'));
+        }
+            
+        $user = $auth->getLastAttempted();
+
+        if($user->confirmed) {
+            if ($throttles) {
+                $this->clearLoginAttempts($request);
+            }
+
+            $auth->login($user, $request->has('memory'));
+
+            if($request->session()->has('user_id')) {
+                $request->session()->forget('user_id');
+            }
+
+            return redirect('/');
+        }
+        
+        $request->session()->put('user_id', $user->id); 
+
+        return redirect('/auth/login')->with('error', trans('front/verify.again'));         
     }
+
+
 }
