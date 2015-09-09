@@ -1,4 +1,4 @@
 <?php
 	return[
-		'send' => 'Send';
+		'send' => 'Send',
 	];
