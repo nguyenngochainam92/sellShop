@@ -1,7 +1,7 @@
 @extends('master')
 @section('title', 'Reset Password')
-
-@section('main')
+@section('content')
+<main role="main" class="container">
 	<div class="row">
 		<div class="box">
 			<div class="col-lg-12">
@@ -30,6 +30,7 @@
 			</div>
 		</div>
 	</div>
+</main>
 @stop
 
 @section('scripts')

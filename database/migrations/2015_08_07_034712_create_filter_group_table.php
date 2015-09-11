@@ -26,6 +26,6 @@ class CreateFilterGroupTable extends Migration
      */
     public function down()
     {
-        Schema::drop('filter_group');
+        Schema::dropIfExists('filter_group');
     }
 }

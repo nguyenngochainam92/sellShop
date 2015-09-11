@@ -26,6 +26,6 @@ class CreateConditionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('condittions');
+        Schema::dropIfExists('condittions');
     }
 }

@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('front/home');
 });
+
+Route::get('/home', function () {
+    return view('front/home');
+});
 Route::get('/contact',function(){
 	return view('front/contact');
 });

@@ -28,6 +28,6 @@ class CreateManufacturerTable extends Migration
      */
     public function down()
     {
-        Schema::drop('manufacturer');
+        Schema::dropIfExists('manufacturer');
     }
 }
