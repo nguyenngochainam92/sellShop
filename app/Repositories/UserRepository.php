@@ -51,4 +51,13 @@ class UserRepository extends BaseRepository
 		return $user;
 	}
 
+	public function confirm($confirmation_code)
+	{
+		$user = $this->model->whereConfirmationCode($confirmation_code)->firstOrFail();
+
+		$user->confirmed = true;
+		$user->confirmation_code=null;
+		$user->save();
+	}
+
 }
