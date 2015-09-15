@@ -15,6 +15,13 @@ Route::get('/', function () {
     return view('front/home');
 });
 
+//Admin
+Route::get('admin',[
+	'uses' => 'AdminController@admin',
+	'as' => 'admin',
+	'middleware' => 'admin'
+]);
+
 Route::get('/home', function () {
     return view('front/home');
 });

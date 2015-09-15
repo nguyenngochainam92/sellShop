@@ -1,0 +1,2 @@
+@extends('back.template')
+
