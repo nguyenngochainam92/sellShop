@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('front/home');
-});
+Route::get('/', [
+	'uses' => "HomeController@index",
+	'as'=>'home'
+]);
 
 //Admin
 Route::get('admin',[

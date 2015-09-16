@@ -59,12 +59,23 @@
 				<div class="col-sm-8">
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
-							<li {!! Request}
-							<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+							@if(session('statut') == 'visitor')
+								<li {!! Request::is('auth/login') ? 'class="active"' : '' !!}>
+									<a href="auth/login"><i class="fa fa-lock"></i> Login</a>
+								</li>
+							@else
+								<li{!! Request::is('auth/profile')? 'class="active"' : '' !!}>
+									<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+								</li>
+							@endif
 							<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-							<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-							<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-							<li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+							<li {!! Request::is('cart/checkout') ? 'class="active"' : '' !!}>
+								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+							<li>
+							<li {!! Request::is('cart/showcart') ? 'class="active"' : '' !!}>
+								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+							</li>
+
 						</ul>
 					</div>
 				</div>
