@@ -12,8 +12,7 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
-		dd(session('statut'));
-		return view('front.index');
+		return view('front.home');
 	}
 
 }

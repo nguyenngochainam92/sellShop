@@ -1,6 +1,6 @@
-<?php namespace App\Services
+<?php namespace App\Services;
 
-class Status {
+class Statut {
 	public function setLoginStatut($user)
 	{
 		session()->put('statut',$user->role->slug);
@@ -13,7 +13,7 @@ class Status {
 	{
 		if(!session()->has('statut'))
 		{
-			session()->put('status',auth()->check() ? auth()->user()->role->slug : 'visitor');
+			session()->put('statut',auth()->check() ? auth()->user()->role->slug : 'visitor');
 		}
 	}
 }
